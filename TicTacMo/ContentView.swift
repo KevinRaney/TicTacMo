@@ -7,21 +7,22 @@
 
 import SwiftUI
 
+let playerX: String = "X"
+let playerO: String = "O"
 
 
 struct ContentView: View {
-  
-@State var whosTurn = "X"
+  @State var whosTurn = "X"
   @State var plays : [String] = ["","","","","","","","",""]
   //@State var plays = ["O","O","","O","O","","O","",""]
   
   private func changePlayer() {
     if whosTurn != "" {
-      whosTurn = whosTurn == "X" ? "O" : "X"
+      whosTurn = whosTurn == playerX ? playerO : playerX
     }
   }
   
-  private func whoWon() -> String? {
+  var whoWon: String? {
     if plays[0] == plays[3] && plays[0] == plays[6] {
       whosTurn = ""
       return plays[0]
@@ -69,164 +70,140 @@ struct ContentView: View {
       }
     }
     
+    whosTurn = ""
     return "Cats Game"
   }
   
     var body: some View {
         VStack {
-          if let whoWon = whoWon() {
-              Text("The winner is \(whoWon)")
-            if whoWon == "Cats Game" {
-              Text("Cats game, tap here to restart the game")
-            }
-          }
+          Text("Tic Tac Mo")
+            .font(.title)
+            .bold()
           
           VStack {
             HStack {
-              if !plays[0].isEmpty {
-                Text(plays[0])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+              PlaySquare(play: $plays[0])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[0] = whosTurn
                     changePlayer()
                   }
-              }
-              if !plays[1].isEmpty {
-                Text(plays[1])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+                }
+              PlaySquare(play: $plays[1])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[1] = whosTurn
                     changePlayer()
                   }
-              }
-              if !plays[2].isEmpty {
-                Text(plays[2])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+                }
+              PlaySquare(play: $plays[2])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[2] = whosTurn
                     changePlayer()
-                  }              }
+                  }
+                }
             }
             HStack {
-              if !plays[3].isEmpty {
-                Text(plays[3])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+              PlaySquare(play: $plays[3])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[3] = whosTurn
                     changePlayer()
-                  }              }
-              if !plays[4].isEmpty {
-                Text(plays[4])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+                  }
+                }
+              PlaySquare(play: $plays[4])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[4] = whosTurn
                     changePlayer()
                   }
-              }
-              if !plays[5].isEmpty {
-                Text(plays[5])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+                }
+              PlaySquare(play: $plays[5])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[5] = whosTurn
                     changePlayer()
                   }
-              }
+                }
             }
             HStack {
-              if !plays[6].isEmpty {
-                Text(plays[6])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+              PlaySquare(play: $plays[6])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[6] = whosTurn
                     changePlayer()
                   }
-              }
-              if !plays[7].isEmpty {
-                Text(plays[7])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+                }
+              PlaySquare(play: $plays[7])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[7] = whosTurn
                     changePlayer()
                   }
-              }
-              if !plays[8].isEmpty {
-                Text(plays[8])
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-              } else {
-                Text("")
-                  .frame(width: 100, height: 100)
-                  .background(Color.gray.opacity(0.5))
-                  .onTapGesture {
+                }
+              PlaySquare(play: $plays[8])
+                .onTapGesture {
+                  if whosTurn != "" {
                     plays[8] = whosTurn
                     changePlayer()
                   }
-              }
+                }
             }
           }
           .padding(20)
           
-            Spacer()
+          if let whoWon = whoWon {
+            
+            if whoWon == "Cats Game" {
+              Text("Cats game, tap here to restart the game")
+                .font(.title)
+                .foregroundStyle(Color.blue)
+            } else if !whoWon.isEmpty {
+              Text("The winner is \(whoWon)")
+                .font(.title)
+                .foregroundStyle(whoWon == playerX ? Color.red : Color.black)
+            }
+          }
+          Spacer()
           Button("Restart Game") {
             plays = ["","","","","","","","",""]
-            whosTurn = "X"
+            whosTurn = playerX
           }
           Spacer()
           Text("It's \(whosTurn)'s turn!")
             .font(.title)
             .onTapGesture {
-              if whosTurn == "X" {
-                whosTurn = "O"
+              if whosTurn == playerX {
+                whosTurn = playerO
               } else {
-                whosTurn = "X"
+                whosTurn = playerX
               }
               
             }
         }
         .padding()
+        .onAppear {
+          if whosTurn == "X" {
+            whosTurn = playerX
+          }
+        }
     }
 }
 
 #Preview {
     ContentView()
+}
+
+struct PlaySquare: View {
+  @Binding var play: String
+  
+  var body: some View {
+    Text(play)
+      .font(.system(size: 50))
+      .bold()
+      .foregroundStyle(play == playerX ? Color.red : Color.black)
+      .frame(width: 100, height: 100)
+      .background(Color.gray.opacity(0.5))
+  }
 }
